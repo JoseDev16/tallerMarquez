@@ -93,12 +93,92 @@ Clientes
     </div>
 </div>
 <!-- Fin Agregar Modal -->
+<!-- Editar  Modal -->
+<div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalTitle"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header" style="background-color:#F2F2F2 !important;">
+                <h5 class="modal-title" id="exampleModalLongTitle">
+                    <i class="fas fw fa-plus-circle"></i>
+                    Editar cliente
+                </h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form action="{{ route('cliente.edit') }}" method="POST" name="miForm">
+                    @csrf
+                    <div class="form-group required">
+                        
+
+                        <label for="" class="control-label">Nombre de Cliente: </label>
+                        <input maxlength="20" type="text" name="nombre_cliente" id="nombre_clienteE"
+                            class="form-control"  placeholder="Ingrese nombre de cliente"  required
+                            autofocus>
+
+                    </div>
+                    <div class="form-group required">
+
+                        <label for="" class="control-label">Apellido de Cliente: </label>
+                        <input maxlength="20" type="text" name="apellido_cliente" id="apellido_clienteE"
+                            class="form-control"  placeholder="Ingrese apellido"  required
+                            autofocus>
+
+                    </div>
+              
+                    <div class="form-group required">
+
+                        <label for="" class="control-label">Telefono: </label>
+                        <input maxlength="20" type="text" name="numero_cliente" id="numero_clienteE"
+                            class="form-control"  placeholder="Ingrese Telefono"  required
+                            autofocus>
+
+                    </div>
+                    <div class="form-group required">
+
+                        <label for="" class="control-label">Direccion: </label>
+                        <input maxlength="20" type="text" name="direccion" id="direccionE"
+                            class="form-control"  placeholder="direccion"  required
+                            autofocus>
+
+                    </div>
+                    <input class="form-control" type="hidden" name="edit_id" id="edit_id">
+                    <div class="modal-footer d-flex justify-content-center">
+                        <input type="hidden" name="user" value="{{auth()->user()->name}}">
+                        <button type="submit" class="btn btn-primary">
+                            <i class='fas fa-check-circle'></i>
+                            Guardar
+                        </button>
+                        <a href="" class="btn btn-primary" data-dismiss="modal">
+                            <i class='fa fa-times'></i>
+                            Cancelar
+                        </a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Fin Agregar Modal -->
+
 <!-- Mensaje Exito -->
 @if(session('exito'))
 <div class="alert alert-success">
     <button type="button" class="close" data-dismiss="alert">×</button>
     {{ session('exito') }}
 </div>
+@endif
+@if ($errors->any())
+    <div class="errors">
+        <p class="alert alert-warning" role="alert">Por favor corrige los siguientes errores</p>
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
 @endif
 <!-- Fin Mensaje Exito -->
 @if(count($clientes) > 0)
@@ -195,6 +275,25 @@ Clientes
 </div>
 @endif
 <script type="text/javascript">
+  function fun_edit(id)
+   {
+      var view_url = "/Cliente/edit/"+id;
+      $.ajax({
+         url: view_url,
+         type:"GET",
+         data: {"id":id},
+         success: function(result){
+            $("#edit_id").val(result.id);
+            $("#nombre_clienteE").val(result.nombre_cliente);
+            $('#apellido_clienteE').val(result.apellido_cliente );
+            $('#numero_clienteE').val(result.numero_cliente);
+           
+            $('#direccionE').val(result.direccion)
+            
+            console.log(result);
+         }
+      });
+   }
 
     function fun_delete(id)
     {

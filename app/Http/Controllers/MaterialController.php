@@ -25,7 +25,10 @@ class MaterialController extends Controller
 
     public function store (Request $request)
     {
-        //dd($request);
+        $validated = $request->validate([
+            'codigo_material' => 'required|unique:materials,codigo_material|max:10',
+
+        ]);
         $material = new Material;
         $material->nombre_material = $request->nombre_material;
         $material->codigo_material = $request->codigo_material;
@@ -68,7 +71,10 @@ class MaterialController extends Controller
 
     public function edit(Request $request)
     {
-        //dd($request);
+        $validated = $request->validate([
+            'codigo_material' => 'required|unique:materials,codigo_material|max:10',
+
+        ]);
 
         $id = $request->edit_id;
 
@@ -80,11 +86,11 @@ class MaterialController extends Controller
         }
 
         $material->nombre_material = $request->nombre_material;
-        $material->codigo_material = $request->codigo_material;
+       // $material->codigo_material = $request->codigo_material;
         $material->subcategoria_material_id=$request->subcat_id;
         $material->unidad_medida= $request->unidad_id;
         $material->composicion_id= 1;
-        $material->save();
+        $material->update();
 
         return back()->with('exito','El material ha sido actualizada exitosamente');
     }

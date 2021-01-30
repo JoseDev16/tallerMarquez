@@ -22,7 +22,7 @@ class CreateMaterialsTable extends Migration
             $table->unsignedBigInteger('subcategoria_material_id');
           //  $table->unsignedBigInteger('composicion_id');
 
-            $table->foreign('subcategoria_material_id')->references('id')->on('sub_categoria_materials');
+            $table->foreign('subcategoria_material_id')->references('id')->on('sub_categoria_materials')->onDelete('cascade');
           //  $table->foreign('composicion_id')->references('id')->on('composicion_materials');
             $table->timestamps();
         });

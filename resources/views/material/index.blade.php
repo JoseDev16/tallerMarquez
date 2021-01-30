@@ -129,6 +129,16 @@ materiales
    {{ session('exito') }}
 </div>
 @endif
+@if ($errors->any())
+    <div class="errors">
+        <p class="alert alert-warning" role="alert">Por favor corrige los siguientes errores</p>
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
 <!-- Fin Mensaje Exito -->
 @if(count($materiales) > 0)
 <br>
@@ -210,9 +220,7 @@ materiales
                 <input  type="text" name="nombre_material" id="nomb_material"
                    class="form-control" placeholder="Ingrese nombre de material"  required  autofocus>
                  <br>
-                <label for="codigo_material" class="control-label">Codigo material: </label>
-                <input  type="text" name="codigo_material" id="cod"
-                class="form-control" placeholder="Ingrese nombre de material"  required  autofocus>
+                
 
                 <br>
                 <label for="" class="control-label">Unidad de medida: </label>

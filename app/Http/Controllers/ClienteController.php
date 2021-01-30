@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Cliente;
 use App\Models\Vehiculo;
 use DB;
+use App\Models\Actividad;
 
 class ClienteController extends Controller
 {
@@ -17,14 +18,81 @@ class ClienteController extends Controller
 
     }
 
-    public function destroy()
+    public function destroy1(Request $request)
     {
+
+      $cliente = Cliente::find($request->delete_id);
+      //$conteo =0;
+      $conteo = DB::table('ordenreparacions')
+      ->join('vehiculos','vehiculos.id','=','ordenreparacions.vehiculo_id')
+      ->join('clientes','clientes.id','=','vehiculos.cliente_id')
+      ->select(DB::raw('COUNT(ordenreparacions.id) as visitas'))
+      ->where('cliente_id',$request->delete_id)
+      ->groupBy('clientes.nombre_cliente','clientes.direccion','clientes.numero_cliente')
+      
+      ->get()
+      ->toArray();
+      
+     // $conteoNumero =array_values($conteo);
+    //  dd(((int)$conteo));
+      $conteoN = (int)($conteo);
+      
+      if($conteoN>0)
+      {
+        return back()->with('exito', 'NO se puede eliminar el cliente ya que hay una factura a su nombre');
+      }else{
+        $cliente->delete();
+      return back()->with('exito', 'El cliente ha sido eliminado exitosamente');
+
+      }
+      
+
+
+    }
+    
+    public function edit_view($id)
+    {
+      $cliente = Cliente::find($id);
+      return response()->json($cliente);
+
+
+    }
+
+    public function edit (Request $request)
+    {
+      
+     
+      $id = $request->edit_id;
+      $cliente = Cliente::find($id);
+      $validated = $request->validate([
+        
+        'numero_cliente' => 'required|unique:clientes,numero_cliente,'.$cliente->id,
+
+    ]);
+      $cliente->nombre_cliente = $request->nombre_cliente;
+      $cliente->apellido_cliente = $request->apellido_cliente;
+      $cliente->direccion = $request->direccion;
+      $cliente->numero_cliente = $request->numero_cliente;
+     
+
+     
+       
+       $cliente->update();
+       $logs = new Actividad();
+       $logs->log($request->user,'edito la informacion de '.$request->nombre_cliente);
+
+       return back()->with('exito','La informacion del cliente ha sido actualizada exitosamente');
 
     }
 
     public function store(Request $request)
     {
       //dd($request);
+      $validated = $request->validate([
+        'dni' => 'required|unique:clientes,dni|max:10',
+        'numero_cliente' => 'required|unique:clientes,numero_cliente',
+
+    ]);
       $cliente = new Cliente;
       $cliente->nombre_cliente = $request->nombre_cliente;
       $cliente->apellido_cliente = $request->apellido_cliente;

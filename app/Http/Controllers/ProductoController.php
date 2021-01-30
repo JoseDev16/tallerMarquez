@@ -23,6 +23,10 @@ class ProductoController extends Controller
 
     public function store(Request $request)
     {
+        $validated = $request->validate([
+            'codigo_producto' => 'required|unique:productos,codigo_producto|max:10',
+
+        ]);
         //dd($request);
         $producto = new Producto;
         $producto->nombre_producto = $request->nombre_producto;
@@ -32,19 +36,12 @@ class ProductoController extends Controller
         $producto->precio_compra = $request->precio_compra;
         $producto->proveedor = $request->proveedor;
 
-        $codigoPrueba = Producto::where('codigo_producto', $request->codigo_producto);
-        if(!$codigoPrueba)
-        {
-            return back()->with('ocupado', 'Este codigo ya existe en el sistema');
-
-        }else
-        {
-            $producto->codigo_producto = $request->codigo_producto;
-            $producto->save();
+        $producto->codigo_producto = $request->codigo_producto;
+        $producto->save();
             return back()->with('exito', 'Producto agregado con exito');
 
 
-        }
+        
 
 
     }
@@ -73,7 +70,7 @@ class ProductoController extends Controller
         $logs = new Actividad();
         $logs->log($request->user,'edito la categoria '.$request->nomb_categoria);
 
-        return back()->with('exito','La categoria ha sido actualizada exitosamente');
+        return back()->with('exito','El producto ha sido actualizada exitosamente');
     }
 
     public function addMaterial(Request $request)
@@ -182,14 +179,14 @@ class ProductoController extends Controller
     public function destroy(Request $request)
     {
       
-        $material = Material::find($request->delete_id);
+        $producto = Producto::find($request->delete_id);
         //dd($categoria);
         $logs = new Actividad();
-        $logs->log($request->user,'elimino el material '.$material->nombre_material);
+        $logs->log($request->user,'elimino el material '.$producto->nombre_producto);
 
-        $material->delete();
+        $producto->delete();
 
-        return back()->with('exito','La categoria ha sido eliminada exitosamente');
+        return back()->with('exito','EL producto ha sido eliminada exitosamente');
     }
 
       //Crea el reporte de Pedido de produccion

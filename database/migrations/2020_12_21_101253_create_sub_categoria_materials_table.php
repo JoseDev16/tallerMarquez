@@ -16,7 +16,7 @@ class CreateSubCategoriaMaterialsTable extends Migration
         Schema::create('sub_categoria_materials', function (Blueprint $table) {
             $table->id();
             $table->string('nombre_subcategoria_material');
-            $table->unsignedBigInteger('categoriaMaterial_id');
+            $table->unsignedBigInteger('categoriaMaterial_id')->onDelete('cascade');
             $table->foreign('categoriaMaterial_id')->references('id')->on('categoria_materials')->onDelete('cascade');;
 
 

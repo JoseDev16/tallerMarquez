@@ -56,11 +56,11 @@ materiales
         </div>
         <div class="form-group">
             <label for="ruta2">Imagen 1</label>
-            <input class="form-control"  type="file" name="ruta2" id="ruta2">
+            <input class="form-control"  type="file" name="ruta2" id="ruta2" required>
         </div>
         <div class="form-group">
             <label for="ruta">Imagen 2</label>
-            <input class="form-control"  type="file" name="ruta" id="ruta">
+            <input class="form-control"  type="file" name="ruta" id="ruta" required>
         </div>
         <input class="form-control" type="hidden" name="hecho_por"  value="{{auth()->user()->name}}">
         <button class="btn btn-primary" type="submit">Guardar</button>

@@ -78,18 +78,18 @@ Route::middleware(['auth'])->group(function () {
 
 
     });
-    Route::middleware(['permission:subcategoria.gestionarSubcategorias'])->group(function () {
-       
+    Route::middleware(['permission:subcategoria.gestionarSubCategorias'])->group(function () {
+
     //Rutas para SubCategoria
     Route::get('/SubCategoriaMaterial', [SubCategoriaMaterialController::class, 'index'])->name('subcategoriaMaterial.index');
     Route::post('/SubCategoriaMaterial/nueva', [SubCategoriaMaterialController::class, 'store'])->name('subcategoriaMaterial.store');
     Route::get('/SubCategoriaMaterial/edit/{id}', [SubCategoriaMaterialController::class, 'edit_view'])->name('subcategoriaMaterial.edit_view');
     Route::post('/SubCategoriaMaterial/edit', [SubCategoriaMaterialController::class, 'edit'])->name('subcategoriaMaterial.edit');
     Route::delete('/SubCategoriaMaterial/delete', [SubCategoriaMaterialController::class, 'destroy'])->name('subcategoriaMaterial.destroy');
-  
+
 
     });
-    Route::middleware(['permission:producto.gestionarProductos'])->group(function () {
+    Route::middleware(['permission:producto.gestionarProducto'])->group(function () {
          //Rutas para producto
         Route::get('/Producto', [ProductoController::class, 'index'])->name('producto.index');
         Route::post('/Producto/nueva', [ProductoController::class, 'store'])->name('producto.store');
@@ -104,13 +104,13 @@ Route::middleware(['auth'])->group(function () {
 
 
 
-       
-       
-    
+
+
+
         });
-        Route::middleware(['permission:herramienta.gestionarHerramientas'])->group(function () {
-          
-   
+        Route::middleware(['permission:herramienta.gestionarHerramienta'])->group(function () {
+
+
                 //Ruta para material
             Route::get('/Material', [MaterialController::class, 'index'])->name('material.index');
             Route::post('/Material/nueva', [MaterialController::class, 'store'])->name('material.store');
@@ -120,8 +120,8 @@ Route::middleware(['auth'])->group(function () {
             Route::get('/search', [MaterialController::class,'search'])->name('posts.search');
             Route::get('Material/load/{id}', [MaterialController::class,'cargarRegistros'])->name('material.load');
 
-          
-       
+
+
         });
 
         Route::middleware(['permission:clientes.gestionarClientes'])->group(function () {
@@ -132,10 +132,14 @@ Route::middleware(['auth'])->group(function () {
            Route::get('/Cliente/Vehiculo/{id}',[VehiculoController::class, 'create'])->name('vehiculo.create');
            Route::post('/Cliente/Vehiculo',[VehiculoController::class, 'store'])->name('vehiculo.store');
            Route::get('/Cliente/Reporte',[ClienteController::class, 'reporteVisitas'])->name('cliente.reporteVisitas');
-               
-       
-           
-       
+           Route::get('/Cliente/edit/{id}', [ClienteController::class, 'edit_view'])->name('cliente.edit_view');
+           Route::post('/Cliente/edit', [ClienteController::class, 'edit'])->name('cliente.edit');
+
+
+
+
+
+
    });
 
     Route::middleware(['permission:orden.gestionarOrdenes'])->group(function () {
@@ -145,7 +149,7 @@ Route::middleware(['auth'])->group(function () {
     Route::delete('/Orden/deleteMaterial', [OrdenReparacionController::class, 'destroyMaterial'])->name('orden.destroyMaterial');
     Route::get('/Orden/loadMaterial/{id}',[OrdenReparacionController::class, 'cargarRegistrosMaterial'])->name('orden.loadMaterial');
     Route::get('Orden/editloadMaterial/{id}',[OrdenReparacionController::class,'editLoadMaterial'])->name('orden.editloadMaterial');
-    
+
 
     //Orden
       Route::get('Orden/AsignarProducto/{id}',[OrdenReparacionController::class,'asignarProducto'])->name('orden.asignarProducto');
@@ -165,24 +169,24 @@ Route::middleware(['auth'])->group(function () {
     Route::post('Orden/reporte',[OrdenReparacionController::class,'reporteOrden'])->name('orden.reporte');
     Route::post('Orden/reporteHerramientas',[OrdenReparacionController::class,'reporteHerramientas'])->name('orden.reporteHerramientas');
 
-          
-   
-      
-   
+
+
+
+
     });
 
- 
 
 
-   
 
 
-   
 
 
-   
 
-    
+
+
+
+
+
 
 
 

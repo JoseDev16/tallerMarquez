@@ -17,7 +17,8 @@ class CreateClienteVehiculosTable extends Migration
             $table->id();
             $table->unsignedBigInteger('cliente_id');
             $table->unsignedBigInteger('vehiculo_id');
-            $table->foreign('vehiculo_id')->references('id')->on('vehiculos');
+            $table->foreign('vehiculo_id')->references('id')->on('vehiculos')->onDelete('cascade');;
+            $table->foreign('cliente_id')->references('id')->on('clientes')->onDelete('cascade');
             $table->timestamps();
         });
     }

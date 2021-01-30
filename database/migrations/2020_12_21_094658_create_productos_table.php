@@ -22,7 +22,7 @@ class CreateProductosTable extends Migration
             $table->string('codigo_producto')->unique();
             $table->string('unidad_medida');
             $table->unsignedBigInteger('categoria_id');
-            $table->foreign('categoria_id')->references('id')->on('categorias');
+            $table->foreign('categoria_id')->references('id')->on('categorias')->onDelete('cascade');;
             $table->timestamps();
         });
     }
