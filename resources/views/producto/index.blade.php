@@ -164,14 +164,23 @@ Productos
 @endif
 
 <!-- Fin Mensaje Exito -->
-@if(count($productos) > 0)
+
 <br>
+<nav class="navbar navbar-light bg-light">
+  <div class="container-fluid">
+    <form class="d-flex">
+      <input class="form-control me-2" name="buscar" type="search" placeholder="Buscar producto.." aria-label="Search">
+      <button class="btn btn-outline-success" type="submit">Buscar</button>
+    </form>
+  </div>
+</nav>
 
 <!-- Table -->
 <table class=" table">
    <thead class="thead-dark">
       <tr>
          <th scope="col">#</th>
+         <th scope="col">Codigo producto</th>
          <th scope="col">Nombre producto</th>
          <th scope="col">Categoría</th>
          <th scope="col">Precio Compra</th>
@@ -186,6 +195,7 @@ Productos
       <?php $i++ ?>
       <tr>
          <td> {{$i}} </td>
+         <td> {{ $producto->codigo_producto }} </td>
          <td> {{ $producto->nombre_producto }} </td>
          @foreach ($categorias as $categoria )
          @if($producto->categoria_id === $categoria->id)
@@ -326,11 +336,7 @@ Productos
       </div>
    </div>
 </div>
-@else
-<div class="alert alert-danger">
-   <strong>¡Opps! Parece que no tienes ninguna producto registrada.</strong>
-</div>
-@endif
+
 <script type="text/javascript">
    function fun_edit(id)
    {

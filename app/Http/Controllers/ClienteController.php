@@ -11,9 +11,13 @@ use App\Models\Actividad;
 class ClienteController extends Controller
 {
     //
-    public function index()
+    public function index(Request $request)
     {
-        $clientes = Cliente::paginate(10);
+        $clientes = Cliente::where('nombre_cliente', 'LIKE', '%'.$request->buscar.'%')
+                    ->orWhere('apellido_cliente', 'LIKE', '%'.$request->buscar.'%')
+                    ->orWhere('dni', 'LIKE', '%'.$request->buscar.'%')
+
+                    ->paginate(10);
         return view('cliente.index', compact("clientes"));
 
     }

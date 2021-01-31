@@ -13,9 +13,13 @@ use App\Models\Material;
 class ProductoController extends Controller
 {
     //
-    public function index()
+    public function index(Request $request)
     {
-        $productos = Producto::orderBy('id','desc')->paginate(10);
+        //$posts = Material::where('codigo_material', 'LIKE', '%'.$prueba.'%')->pluck('codigo_material');
+        $productos = Producto::where('nombre_producto', 'LIKE', '%'.$request->buscar.'%')
+                    ->orWhere('codigo_producto', 'LIKE', '%'.$request->buscar.'%')
+                    ->paginate(10);
+       // $productos = Producto::orderBy('id','desc')->paginate(10);
         $categorias = Categoria::all();
 
         return \view('producto.index',compact('productos','categorias'));

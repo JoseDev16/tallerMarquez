@@ -181,7 +181,15 @@ Clientes
     </div>
 @endif
 <!-- Fin Mensaje Exito -->
-@if(count($clientes) > 0)
+<nav class="navbar navbar-light bg-light">
+  <div class="container-fluid">
+    <form class="d-flex">
+      <input class="form-control me-2" name="buscar" type="search" placeholder="Buscar Cliente.." aria-label="Search">
+      <button class="btn btn-outline-success" type="submit">Buscar</button>
+    </form>
+  </div>
+</nav>
+
 <!-- Table -->
 <table class="table">
     <thead class="thead-dark">
@@ -269,11 +277,7 @@ Clientes
         </div>
     </div>
 </div>
-@else
-<div class="alert alert-danger">
-    <strong>¡Opps! Parece que no tienes ninguna Cliente registrada.</strong>
-</div>
-@endif
+
 <script type="text/javascript">
   function fun_edit(id)
    {
