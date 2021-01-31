@@ -117,9 +117,9 @@
        <div class="col-md-4" style="float:left">
          <div class="card mb-2">
            <img class="card-img-top"
-           src="https://lh3.googleusercontent.com/proxy/krCkmRFcISVZ-sHEz1tscZDpmgG2w2XzfaAmIgaiaWoGcKFuVsmOJp-JTDz4gvsAktBheqevaNQdwwKg7CDe8zOUoyZ0SrCxaaznqgIYqW6KO6Az7ks">
+           src="https://pbs.twimg.com/media/CHJqWJEW4AAjIEd.jpg">
            <div class="card-body">
-             <a  class="btn btn-dark text-white">Obtener promocion</a>
+             <a  data-target="#waModal" data-toggle="modal"  class="btn btn-dark text-white">Obtener promocion</a>
            </div>
          </div>
        </div>
@@ -167,7 +167,7 @@
            <img class="card-img-top"
            src="https://www.agromaquinaria.es/ofertas/fotos/12240506062018.jpg">
            <div class="card-body">
-            <button data-target="#modalCita" data-toggle="modal"   class="btn btn-dark text-white">Obtener promocion</button>
+            <button data-target="#waModal" data-toggle="modal"   class="btn btn-dark text-white">Obtener promocion</button>
            </div>
          </div>
        </div>
@@ -188,64 +188,20 @@
        </section>
       
   </div>
-    <!-- Wasap Modal -->
-<div class="modal fade" id="waModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalTitle"
-aria-hidden="true">
-<div class="modal-dialog" role="document">
-   <div class="modal-content">
-      <div class="modal-header" style="background-color:#F2F2F2 !important;">
-         <h5 class="modal-title" id="exampleModalLongTitle">
-            <i class="fab fa-whatsapp"></i>
-            Agendar cita
-         </h5>
-         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-         </button>
-      </div>
-      <div class="modal-body">
-         
-            <div class="form-group required">
-             <label for="" class="control-label">Seleccione fecha y hora: </label>
-             <input  type="datetime-local" name="fecha" id="fecha"
-                class="form-control" required  autofocus>
-              <br>
-              <label for="" class="control-label">Razon </label>
-              <input  type="text" name="razon" id="razon"
-                 class="form-control"   required autofocus>
-               <br>
-            
-           
-       
-            <div class="modal-footer d-flex justify-content-center">
-              <button class="form-control btn btn-success " onclick="ShowSelected2()"><i class="fab fa-whatsapp "></i> Agendar cita</i></button>
-
-              
-              
-               <a href="" class="btn btn-primary" data-dismiss="modal">
-                  <i class='fa fa-times'></i>
-                  Cancelar
-               </a>
-            </div>
-        
-      </div>
-   </div>
-</div>
-</div>
   <!-- Wasap Modal -->
-<div class="modal fade" id="waModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalTitle"
-aria-hidden="true">
-<div class="modal-dialog" role="document">
-   <div class="modal-content">
-      <div class="modal-header" style="background-color:#F2F2F2 !important;">
-         <h5 class="modal-title" id="exampleModalLongTitle">
-            <i class="fab fa-whatsapp"></i>
-            Obtener promocion
-         </h5>
-         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-         </button>
-      </div>
-      <div class="modal-body">
+<div class="modal fade" id="waModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalTitle2" aria-hidden="true">
+   <div class="modal-dialog" role="document">
+      <div class="modal-content">
+         <div class="modal-header" style="background-color:#F2F2F2 !important;">
+            <h5 class="modal-title" id="exampleModalLongTitle">
+               <i class="fab fa-whatsapp"></i>
+               Obtener promocion
+            </h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+               <span aria-hidden="true">&times;</span>
+            </button>
+         </div>
+         <div class="modal-body">
          
             <div class="form-group required">
              <label for="" class="control-label">Promocion en la que estas interesado: </label>
@@ -259,10 +215,9 @@ aria-hidden="true">
             
            
        
-            <div class="modal-footer d-flex justify-content-center">
+         <div class="modal-footer d-flex justify-content-center">
               <button class="form-control btn btn-success " onclick="ShowSelected()"><i class="fab fa-whatsapp "></i> Realiza tu encargo!</i></button>
-
-              
+           
               
                <a href="" class="btn btn-primary" data-dismiss="modal">
                   <i class='fa fa-times'></i>
@@ -270,10 +225,11 @@ aria-hidden="true">
                </a>
             </div>
         
+         </div>
       </div>
-   </div>
+  </div>
 </div>
-</div>
+
 
 
 
