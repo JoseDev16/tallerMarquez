@@ -248,6 +248,24 @@ class OrdenReparacionController extends Controller
     //Destruye un producto asociado a una oorden de reparacion
     public function destroyProducto(Request $request)
     {
+        $idProducto = DB::table('orden_productos')
+            
+        ->where('id', $request->delete_id)
+        
+        ->pluck('producto_id')->first();
+
+        $cantidadAnterior = DB::table('orden_productos')
+            
+        ->where('id', $request->delete_id)
+        
+        ->pluck('cantidad')->first();
+        //dd($idProducto);
+
+        $producto = Producto::find($idProducto);
+        $cantActual = $producto->cantidad_producto;
+        $producto->cantidad_producto = $cantActual + $cantidadAnterior;
+        $producto->update();
+        
 
         DB::table('orden_productos')
         ->where('id',$request->delete_id)
@@ -269,7 +287,7 @@ class OrdenReparacionController extends Controller
                 ->where('ordenreparacions.id',$request->orden_id)
                 ->first();
             $productos = DB::table('orden_productos')
-                ->select('orden_productos.*','productos.nombre_producto','productos.precio','productos.codigo_producto','ordenreparacions.codigo_orden','ordenreparacions.fecha_entrega')
+                ->select('orden_productos.*','productos.nombre_producto','productos.cantidad_producto','productos.precio','productos.codigo_producto','ordenreparacions.codigo_orden','ordenreparacions.fecha_entrega')
                 ->join('ordenreparacions', 'ordenreparacions.id', '=', 'orden_productos.orden_id')
                 ->join('productos', 'productos.id', '=', 'orden_productos.producto_id')
                 ->where('orden_productos.orden_id', $request->orden_id)->get();
@@ -410,7 +428,8 @@ class OrdenReparacionController extends Controller
 
         public function destroyMaterial(Request $request)
     {
-
+        
+      
         DB::table('orden_materials')
         ->where('id',$request->delete_id)
         ->delete();
