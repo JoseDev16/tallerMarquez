@@ -120,55 +120,116 @@ class OrdenReparacionController extends Controller
     //  Para crear
         if(!($request->edit))
         {
-           if($request->prioridad)
-           { //dd($request);
-               DB::table('orden_productos')->insert([
-                   'orden_id' => $request->id_orden,
-                   'producto_id' => $request->id_producto,
-                   'prioridad' => 1,
-                   'cantidad' => $request->cantidad_producto,
-                   
+            if($request->prioridad)
+            {  if($request->cant2 >= $request->cantidad_producto)
+                    {
+                        DB::table('orden_productos')->insert([
+                            'orden_id' => $request->id_orden,
+                            'producto_id' => $request->id_producto,
+                            'prioridad' => 1,
+                            'cantidad' => $request->cantidad_producto,
+                            
 
-               ]);
-               return back()->with('exito', 'Producto editado de la orden con exito');
+                        ]);
+                        $nuevoStock = $request->cant2 - $request->cantidad_producto;
+                
+                        $producto = Producto::find($request->id_producto);
+                        $producto->cantidad_producto = $nuevoStock;
+                        $producto->update();
+                        return back()->with('exito', 'Producto editado de la orden con exito');
+                    }else
+                    {
+                        return back()->with('exito', 'Stock insuficiente');
+
+                    }
 
            }else
-           {
-               DB::table('orden_productos')->insert([
-                   'orden_id' => $request->id_orden,
-                   'producto_id' => $request->id_producto,
-                   'prioridad' => 0,
-                   'cantidad' => $request->cantidad_producto,
-                 
+           {    
+                if($request->cant2 >= $request->cantidad_producto)
+                {
+                    DB::table('orden_productos')->insert([
+                        'orden_id' => $request->id_orden,
+                        'producto_id' => $request->id_producto,
+                        'prioridad' => 0,
+                        'cantidad' => $request->cantidad_producto,
+                      
+     
+                    ]);
+                    $nuevoStock = $request->cant2 - $request->cantidad_producto;
+     
+                    $producto = Producto::find($request->id_producto);
+                    $producto->cantidad_producto = $nuevoStock;
+                    $producto->update();
+                    return back()->with('exito', 'Producto agregado a la exito');
 
-               ]);
-               return back()->with('exito', 'Producto agregado a la exito');
+                }else{
+                    return back()->with('exito', 'Stock insuficiente');
+
+                }
+              
+               
+               
+               
 
            }
             //Para editar
          }else
           {
-           if($request->prioridad)
+            $producto=Producto::find($request->id_producto);
+            $cantidadAnterior = DB::table('orden_productos')
+            
+            ->where('orden_id', $request->id_orden)
+            ->where('producto_id', $request->id_producto)
+            ->pluck('cantidad')->first();
+            
+           if ($request->prioridad) 
            {
-             //dd($request);
-               DB::table('orden_productos')
-               ->where('orden_id',$request->id_orden)
-               ->where('producto_id',$request->id_producto)
-               ->update(['prioridad' => 1, 'cantidad' =>$request->cantidad_producto]);
-               return back()->with('exito', 'Producto editado de orden con exito');
+             
 
+               if ($request->cant2 >= $request->cantidad_producto) {
+                   if ($cantidadAnterior > $request->cantidad_producto) {
+                       $descuento =  $cantidadAnterior -  $request->cantidad_producto;
+                       $cantidadActual = $producto->cantidad_producto;
+                       $producto->cantidad_producto = $cantidadActual + $descuento;
+                       $producto->update();
+                   } else {
+                       $descuento =  $request->cantidad_producto - $cantidadAnterior;
+                       $cantidadActual = $producto->cantidad_producto;
+                       $producto->cantidad_producto = $cantidadActual - $descuento;
+                       $producto->update();
+                   }
+                   DB::table('orden_productos')
+                    ->where('orden_id', $request->id_orden)
+                    ->where('producto_id', $request->id_producto)
+                    ->update(['prioridad' => 1, 'cantidad' =>$request->cantidad_producto]);
+                   return back()->with('exito', 'Producto editado de orden con exito');
+               } else {
+                   return back()->with('exito', 'Stock insuficiente');
+               }
            }else
-           {
-               DB::table('orden_productos')
-               ->where('orden_id',$request->id_orden)
-               ->where('producto_id',$request->id_producto)
-               ->update(['prioridad' => 0, 'cantidad' =>$request->cantidad_producto]);
-               return back()->with('exito', 'Producto editado de orden con exito');
+            if ($request->cant2 >= $request->cantidad_producto) {
+                if ($cantidadAnterior > $request->cantidad_producto) {
+                    $descuento =  $cantidadAnterior -  $request->cantidad_producto;
+                    $cantidadActual = $producto->cantidad_producto;
+                    $producto->cantidad_producto = $cantidadActual + $descuento;
+                    $producto->update();
+                } else {
+                    $descuento =  $request->cantidad_producto - $cantidadAnterior;
+                    $cantidadActual = $producto->cantidad_producto;
+                    $producto->cantidad_producto = $cantidadActual - $descuento;
+                    $producto->update();
+                }
+                DB::table('orden_productos')
+                    ->where('orden_id',$request->id_orden)
+                    ->where('producto_id',$request->id_producto)
+                    ->update(['prioridad' => 0, 'cantidad' =>$request->cantidad_producto]);
+                    return back()->with('exito', 'Producto editado de orden con exito');
+                } else {
+                    return back()->with('exito', 'Stock insuficiente');
+                }
 
-           }
 
-
-          }
+        }
 
     }
     //Envia la informacion de un producto especifico de una orden de produccion para editarlo
@@ -176,7 +237,7 @@ class OrdenReparacionController extends Controller
     {
       $producto = DB::table('orden_productos')
           ->select('orden_productos.*','productos.nombre_producto','productos.unidad_medida','productos.precio',
-          'productos.codigo_producto','ordenreparacions.codigo_orden','ordenreparacions.fecha_entrega')
+          'productos.codigo_producto','productos.cantidad_producto','ordenreparacions.codigo_orden','ordenreparacions.fecha_entrega')
           ->join('ordenreparacions', 'ordenreparacions.id', '=', 'orden_productos.orden_id')
           ->join('productos', 'productos.id', '=', 'orden_productos.producto_id')
           ->where('orden_productos.id',$id)->get();

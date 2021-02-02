@@ -12,6 +12,7 @@ REPORTE DE PRODUCTOS Y PROVEEDORES
          <th scope="col">Proveedor</th>
          <th scope="col">Precio Compra</th>
          <th scope="col">Precio Venta</th>
+         <th scope="col">Stock</th>
          
       </tr>
    </thead>
@@ -27,6 +28,7 @@ REPORTE DE PRODUCTOS Y PROVEEDORES
          <td>{{$producto->proveedor}}</td>
          <td>{{$producto->precio_compra}}</td>
          <td>{{$producto->precio}}</td>
+         <td>{{$producto->cantidad_producto}}</td>
       </tr>
       @endforeach
    </tbody>

@@ -57,14 +57,17 @@ productoes
         <label for="nombre_producto" class="col-form-label">Nombre Producto</label>
         <input type="text" class="form-control" disabled name="nombre_producto" id="nombre_producto">
       </div>
-      <div class="col-md-2">
-        <label for="unidad_medida" class="col-form-label">Unidad de medida</label>
-        <input type="text" class="form-control" disabled name="unidad_medida" id="unidad_medida">
-      </div>
+   
       <div class="col-md-2">
         <label for="nombre_producto" class="col-form-label">Precio</label>
         <input type="text" class="form-control" disabled name="precio" id="precio">
       </div>
+         <div class="col-md-2">
+        <label for="nombre_producto" class="col-form-label">Stock</label>
+        <input type="text" class="form-control" disabled name="cant" id="cant">
+      </div>
+      <input type="hidden" class="form-control" name="cant2" id="cant2">
+ 
       <div class="col-md-2">
         <label for="cantidad" class="col-form-label">Cantidad</label>
         <input type="number" class="form-control" name="cantidad_producto" id="cantidad_producto" step="any" required>
@@ -202,6 +205,8 @@ productoes
                 $('#nombre_producto').val(result[0].nombre_producto);
                 $('#unidad_medida').val(result[0].unidad_medida);
                 $('#precio').val(result[0].precio);
+                $('#cant').val(result[0].cantidad_producto);
+                $('#cant2').val(result[0].cantidad_producto);
                 $('#proveedor').val(result[0].proveedor);
                 console.log(result[0].id);
                 $('#id_producto').val(result[0].id);
@@ -229,6 +234,8 @@ productoes
                 $('#nombre_producto').val(result[0].nombre_producto);
                 $('#unidad_medida').val(result[0].unidad_medida);
                 $('#cantidad_producto').val(result[0].cantidad);
+                  $('#cant').val(result[0].cantidad_producto);
+                $('#cant2').val(result[0].cantidad_producto);
                 $('#precio').val(result[0].precio);
 
                 if(result[0].prioridad)

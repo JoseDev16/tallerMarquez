@@ -20,6 +20,7 @@ class CreateProductosTable extends Migration
             $table->string('proveedor');
             $table->string('nombre_producto');
             $table->string('codigo_producto')->unique();
+            $table->integer('cantidad_producto');
             $table->string('unidad_medida');
             $table->unsignedBigInteger('categoria_id');
             $table->foreign('categoria_id')->references('id')->on('categorias')->onDelete('cascade');;

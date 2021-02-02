@@ -127,6 +127,16 @@ Productos
                   <input  type="number" name="precio_compra" id="precio_compra"
                      class="form-control"  placeholder="$0.00" required autofocus min="0.0" step="0.1">
                     <br>
+                     <label for="" class="control-label">Stock : </label>
+                  <input  type="number" name="cantidad_producto" id="cantidad_producto"
+                     class="form-control" required
+                     autofocus>
+                  @if($errors->has('precioCompra'))
+                  <span class="invalid-feedback" role="alert">
+                     <strong>{{ $errors->first('precioCompra') }}</strong>
+                  </span>
+                  @endif
+                  <br>
                     <label for="" class="control-label">Proveedor: </label>
                   <input  type="text" name="proveedor" id="proveedor"
                      class="form-control"  placeholder="Ingrese nombre de producto" required autofocus>
@@ -185,6 +195,7 @@ Productos
          <th scope="col">Categoría</th>
          <th scope="col">Precio Compra</th>
          <th scope="col">Precio Venta</th>
+         <th scope="col">Stock</th>
          <th scope="col">Proveedor</th>
          <th scope="col">Acciones</th>
       </tr>
@@ -204,6 +215,7 @@ Productos
          @endforeach
          <td>${{ $producto->precio_compra }}</td>
          <td>${{ $producto->precio }}</td>
+         <td>{{ $producto->cantidad_producto }}</td>
          <td>{{ $producto->proveedor }}</td>
          <td style="display: flex">
            <!--can('producto.edit_view')-->
@@ -273,6 +285,16 @@ Productos
                   @if($errors->has('precioVenta'))
                   <span class="invalid-feedback" role="alert">
                      <strong>{{ $errors->first('precioVenta') }}</strong>
+                  </span>
+                  @endif
+                  <br>
+                   <label for="" class="control-label">Stock: </label>
+                  <input  type="number" name="cantidad_productoE" id="cantidad_productoE"
+                     class="form-control" required
+                     autofocus>
+                  @if($errors->has('precioCompra'))
+                  <span class="invalid-feedback" role="alert">
+                     <strong>{{ $errors->first('cantidad_productoE') }}</strong>
                   </span>
                   @endif
                   <br>
@@ -351,6 +373,7 @@ Productos
             $('#cat_id').val(result.categoria_id);
             $('#precioVenta').val(result.precio);
             $('#precioCompra').val(result.precio_compra);
+            $('#cantidad_productoE').val(result.cantidad_produco);
             console.log(result);
          }
       });

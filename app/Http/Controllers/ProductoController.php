@@ -39,6 +39,7 @@ class ProductoController extends Controller
         $producto->precio = $request->precio;
         $producto->precio_compra = $request->precio_compra;
         $producto->proveedor = $request->proveedor;
+        $producto->cantidad_producto = $request->cantidad_producto;
 
         $producto->codigo_producto = $request->codigo_producto;
         $producto->save();
@@ -70,9 +71,10 @@ class ProductoController extends Controller
 
         $producto->nombre_producto = $request->nomb_producto;
         $producto->categoria_id = $request->cat_id;
+        $producto->cantidad_producto = $request->cantidad_productoE;
         $producto->save();
         $logs = new Actividad();
-        $logs->log($request->user,'edito la categoria '.$request->nomb_categoria);
+        $logs->log($request->user,'edito el producto '.$request->nomb_producto);
 
         return back()->with('exito','El producto ha sido actualizada exitosamente');
     }
