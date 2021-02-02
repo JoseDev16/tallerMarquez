@@ -150,8 +150,7 @@ materiales
          <th scope="col">Codigo Herramienta</th>
          <th scope="col">Nombre Herramienta</th>
          <th scope="col">Unidad medida</th>
-         <th scope="col">Categoría</th>
-         <th scope="col">Subcategoría</th>
+
 
          <th scope="col">Acciones</th>
       </tr>
@@ -165,16 +164,7 @@ materiales
          <td> {{ $material->codigo_material }} </td>
          <td> {{ $material->nombre_material }} </td>
          <td> {{ $material->unidad_medida }} </td>
-         @foreach ($subcategorias as $scategoria )
-
-         <td> {{ $scategoria->categoria->nombre_categoriaMaterial }} </td>
-
-         @endforeach
-         @foreach ($subcategorias as $subcategoria )
-         @if($material->subcategoria_material_id === $subcategoria->id)
-         <td> {{ $subcategoria->nombre_subcategoria_material }} </td>
-         @endif
-         @endforeach
+  
       
          <td style="display: flex">
            <!--can('material.edit_view')-->

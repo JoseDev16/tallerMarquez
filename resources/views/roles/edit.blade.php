@@ -65,7 +65,7 @@ Editar Rol
                                     <i class='fas fa-check-circle'></i>
                                     {{ __('Editar Rol') }}
                                 </button>
-                                <a href="{{url('/')}}" class="btn btn-primary" data-dismiss="modal">
+                                <a href="{{url('/roles')}}" class="btn btn-primary" data-dismiss="modal">
                                     <i class='fa fa-times'></i>
                                     Cancelar
                                 </a>

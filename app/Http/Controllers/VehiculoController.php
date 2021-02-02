@@ -18,6 +18,11 @@ class VehiculoController extends Controller
 
     public function store (Request $request)
     {
+      $validated = $request->validate([
+        
+        'placa' => 'required|unique:vehiculos,placa,',
+
+    ]);
       //dd($request);
       $vehiculo = new Vehiculo;
       $vehiculo->placa = $request->placa;

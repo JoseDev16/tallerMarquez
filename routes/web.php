@@ -116,7 +116,7 @@ Route::middleware(['auth'])->group(function () {
             Route::post('/Material/nueva', [MaterialController::class, 'store'])->name('material.store');
             Route::get('/Material/edit/{id}', [MaterialController::class, 'edit_view'])->name('material.edit_view');
             Route::post('/Material/edit', [MaterialController::class, 'edit'])->name('material.edit');
-            Route::delete('/Material/delete', [ProductoController::class, 'destroy'])->name('material.destroy');
+            Route::delete('/Material/delete', [MaterialController::class, 'destroy'])->name('material.destroy');
             Route::get('/search', [MaterialController::class,'search'])->name('posts.search');
             Route::get('Material/load/{id}', [MaterialController::class,'cargarRegistros'])->name('material.load');
 

@@ -182,15 +182,36 @@ class ProductoController extends Controller
 
     public function destroy(Request $request)
     {
-      
         $producto = Producto::find($request->delete_id);
+        //$conteo =0;
+        $conteo = DB::table('orden_productos')
+        ->join('productos','productos.id','=','orden_productos.producto_id')
+        
+        ->select(DB::raw('COUNT(orden_productos.id) as cantProductos'))
+        ->where('producto_id',$request->delete_id)
+        ->groupBy('productos.nombre_producto')
+        
+        ->get()
+        ->toArray();
+        
+        $conteoNumero =array_values($conteo);
+     //  dd(((int)$conteo));
+        $conteoN = (int)($conteo);
+        if($conteoN>0)
+        {
+          return back()->with('exito', 'NO se puede eliminar el producto ya que esta incluido en una factura');
+        }else{
+            $producto->delete();
+            return back()->with('exito', 'El producto ha sido eliminado exitosamente');
+        }
+       /* $producto = Producto::find($request->delete_id);
         //dd($categoria);
         $logs = new Actividad();
         $logs->log($request->user,'elimino el material '.$producto->nombre_producto);
 
         $producto->delete();
 
-        return back()->with('exito','EL producto ha sido eliminada exitosamente');
+        return back()->with('exito','EL producto ha sido eliminada exitosamente');*/
     }
 
       //Crea el reporte de Pedido de produccion

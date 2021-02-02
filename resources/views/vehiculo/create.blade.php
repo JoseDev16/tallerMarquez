@@ -9,6 +9,16 @@ Clientes
         <li class="breadcrumb-item active" aria-current="page">/Asignar vehiculo </li>
     </ol>
 </nav>
+@if ($errors->any())
+    <div class="errors">
+        <p class="alert alert-warning" role="alert">Por favor corrige los siguientes errores</p>
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
 
 <!-- Boton agregar cliente modal -->
 

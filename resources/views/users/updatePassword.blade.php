@@ -72,7 +72,7 @@ Actualizar contraseña
                                     <i class='fas fa-check-circle'></i>
                                     {{ __('Cambiar contraseña') }}
                                 </button>
-                                <a href="{{url('/')}}" class="btn btn-primary" data-dismiss="modal">
+                                <a href="{{url('/usuarios')}}" class="btn btn-primary" data-dismiss="modal">
                                     <i class='fa fa-times'></i>
                                     Cancelar
                                 </a>

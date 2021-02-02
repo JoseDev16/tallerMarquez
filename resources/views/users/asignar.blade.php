@@ -75,7 +75,7 @@ aria-hidden="true">
                   Asignar
                </button>
                <input type="hidden" id="user_id" name="user_id">
-               <a href="" class="btn btn-primary" data-dismiss="modal">
+               <a href="{{url('/usuarios')}}" class="btn btn-primary" data-dismiss="modal">
                   <i class='fa fa-times'></i>
                   Cancelar
                </a>
