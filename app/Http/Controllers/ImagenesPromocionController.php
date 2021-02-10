@@ -23,6 +23,19 @@ class ImagenesPromocionController extends Controller
 
     public function store(Request $request)
     {
+       
+
+        $validated = $request->validate([
+            'imagen1g' => 'mimes:jpg,bmp,png',
+            'imagen2g' => 'mimes:jpg,bmp,png',
+            'imagen1c' => 'mimes:jpg,bmp,png',
+            'imagen2c' => 'mimes:jpg,bmp,png',
+            'imagen3c' => 'mimes:jpg,bmp,png',
+            'imagen4c' => 'mimes:jpg,bmp,png',
+            'imagen5c' => 'mimes:jpg,bmp,png',
+            'imagen6c' => 'mimes:jpg,bmp,png',
+
+        ]);
         $imagen = new ImagenesPromocion;
         if($request->hasFile('imagen1g'));
         {
