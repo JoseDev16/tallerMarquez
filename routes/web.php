@@ -13,6 +13,8 @@ use App\Http\Controllers\ComposicionMaterialController;
 use App\Http\Controllers\ClienteController;
 use App\Http\Controllers\VehiculoController;
 use App\Http\Controllers\OrdenReparacionController;
+use App\Http\Controllers\ReservaController;
+use App\Http\Controllers\ImagenesPromocionController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -23,15 +25,18 @@ use App\Http\Controllers\OrdenReparacionController;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('/', function () {
-    return view('inicioClientes');
-})->name('home');
+//Route::get('/', function () {
+  //  return view('inicioClientes');
+//})->name('home');
+Route::get('/', [ImagenesPromocionController::class, 'inicioClientes'])->name('home');
+
 Route::middleware(['auth'])->get('/admin', function () {
     return view('inicioAdmin');
 })->name('home');
 
 Route::middleware(['auth:sanctum', 'verified'])
     ->get('/dashboard', [UserController::class, 'index'])->name('dashboard');
+Route::post('/Reserva/nueva', [ReservaController::class, 'store'])->name('reserva.store');
 
 
 //Rutas para usuario
@@ -170,8 +175,20 @@ Route::middleware(['auth'])->group(function () {
     Route::post('Orden/reporteHerramientas',[OrdenReparacionController::class,'reporteHerramientas'])->name('orden.reporteHerramientas');
 
 
-
-
+//RUTAS RESERVA
+  //Ruta para material
+  Route::get('/Reserva', [ReservaController::class, 'index'])->name('reserva.index');
+  
+  Route::get('/Reserva/edit_view/{id}', [ReservaController::class, 'edit_view'])->name('reserva.edit_view');
+  Route::post('/Reserva/edit', [ReservaController::class, 'edit'])->name('reserva.edit');
+  Route::delete('/Reserva/delete', [ReservaController::class, 'destroy'])->name('reserva.destroy');
+  
+  //administracion imagenes
+  Route::get('/imagenes', [ImagenesPromocionController::class, 'index'])->name('imagen.index');
+  Route::post('/imagenes/nueva', [ImagenesPromocionController::class, 'store'])->name('imagen.store');
+  Route::get('/imagenes/edit/{id}', [ImagenesPromocionController::class, 'edit_view'])->name('imagen.edit_view');
+  Route::post('/imagenes/edit', [ImagenesPromocionController::class, 'edit'])->name('imagen.edit');
+  Route::delete('/imagenes/delete', [ImagenesPromocionController::class, 'destroy'])->name('imagen.destroy');
 
     });
 

@@ -9,6 +9,11 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/css/bootstrap-datetimepicker.css" integrity="sha256-b5ZKCi55IX+24Jqn638cP/q3Nb2nlx+MH/vMMqrId6k=" crossorigin="anonymous" />
+
   <link href="{{ asset('vendor/fontawesome-free/css/all.min.css') }}" rel="stylesheet" type="text/css">
   <style>
   .fakeimg {
@@ -33,15 +38,97 @@
         Bienvenidos a Taller Ramirez
 
     </header>
-
+@if(session('exito'))
+   <div class="alert alert-success">
+      <button type="button" class="close" data-dismiss="alert">×</button>
+      {{ session('exito') }}
+   </div>
+@endif
+@if(session('advertencia'))
+   <div class="alert alert-danger">
+      <button type="button" class="close" data-dismiss="alert">×</button>
+      {{ session('advertencia') }}
+   </div>
+@endif   
     @yield('content')
 
  
 </div>
 
 <!-- Editar Modal -->
+<div class="modal fade" id="waModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalTitle"
+   aria-hidden="true">
+   <div class="modal-dialog" role="document">
+      <div class="modal-content">
+         <div class="modal-header" style="background-color:#F2F2F2 !important;">
+            <h5 class="modal-title" id="exampleModalLongTitle">
+               <i class="fas fa-w fa-edit"></i>
+               Nueva reserva
+            </h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+               <span aria-hidden="true">&times;</span>
+            </button>
+         </div>
+         <div class="modal-body">
+            <form action="{{ route('reserva.store') }}" method="POST">
+               @csrf
+               <div class="form-group required">
+                <label for="" class="control-label">Ingrese su nombre completo: </label>
+                <input  type="text" name="cliente" id="cliente"
+                   class="form-control" placeholder="Nombre completo"  required  autofocus>
+                 <br>
+                  <label for="mecanico" class="control-label">Telefono: </label>
+                <input  type="text" name="telefono" id="telefono"
+                class="form-control"   required  autofocus>
+                <br>
+                <label for="codigo_material" class="control-label">Fecha de reserva: </label>
+                  <input type="text" class="form-control" id="demo" name="fecha"/>
+                                    
+              
+                <br>
+                 <label for="hora" class="control-label">Hora: </label>
+                   <select class="form-control"  name="hora" required>
+                   
+                     <option value="8-AM">8-AM</option>
+                     <option value="9-AM">9-AM</option>
+                     <option value="10-AM">10-AM</option>
+                     <option value="11-AM">11-MD</option>
+                     <option value="12-AM">12-MD</option>
+                     <option value="1-PM">1-PM</option>
+                     <option value="2-PM">2-PM</option>
+                     <option value="3-PM">3-PM</option>
+                     <option value="4-PM">4-PM</option>
+                     <option value="5-PM">5-PM</option>
+                    
+                  </select>
+               <label for="" class="control-label">Razon: </label>
+                <input  type="text" name="razon" id="razon"
+                   class="form-control" placeholder="Ingrese nombre de material"  required  autofocus>
+         
+       
+               <div class="modal-footer d-flex justify-content-center">
+                  <button type="submit" class="btn btn-primary">
+                     <i class='fas fa-check-circle'></i>
+                     Guardar reserva
+                  </button>
+                  <input type="hidden" id="edit_id" name="edit_id">
+                  <a href="" class="btn btn-primary" data-dismiss="modal">
+                     <i class='fa fa-times'></i>
+                     Cancelar
+                  </a>
+               </div>
+            </form>
+         </div>
+      </div>
+   </div>
+</div>
+<!-- Fin Editar Modal-->
 
-  <!-- Wasap Modal -->
+
+
+
+
+  <!-- Wasap Modal 
 <div class="modal fade" id="waModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalTitle"
 aria-hidden="true">
 <div class="modal-dialog" role="document">
@@ -83,8 +170,45 @@ aria-hidden="true">
       </div>
    </div>
 </div>
-</div>
+</div> -->
 
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.26.0/moment.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js" integrity="sha256-5YmaxAwMjIpMrVlK84Y/+NjCpKnFYa8bWWBbUHSBGfU=" crossorigin="anonymous"></script>
+    <script type="text/javascript">
+
+
+    $(document).ready(function(){
+        $("#demo").datepicker({
+            dateFormat: 'yy-mm-dd',
+          
+                firstDay: 1,
+               
+                monthNames: ['Enero', 'Febrero', 'Marzo',
+                'Abril', 'Mayo', 'Junio',
+                'Julio', 'Agosto', 'Septiembre',
+                'Octubre', 'Noviembre', 'Diciembre'],
+                monthNamesShort: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun',
+                'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'],
+                dayNamesMin: ['Dom', 'Lun', 'Mar', 'Mie', 'Jue', 'Vie', 'Sab'],
+               minDate:0,
+               maxDate: 7,
+               beforeShowDay: function (day) { 
+                                 var day = day.getDay(); 
+                                  if (day == 0) { 
+                                     return [false, "text-danger"] 
+                                 } else { 
+                                 return [true, "text-danger"] 
+                                  } 
+                              } 
+              
+
+
+
+                
+        });
+    });
+</script>
 </body>
 </html>

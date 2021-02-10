@@ -25,7 +25,7 @@
                 <div class="carousel-item active">
                    <div class="view">
                       <img class="d-block w-100"
-                       src="https://i.pinimg.com/originals/d4/97/d4/d497d49aef7ded8a336d6ce71d84dff2.jpg"
+                       src="{{ asset('img').'/'.$imagen->imagen1g }}"
                          alt="First slide">
                       <div class="mask rgba-black-light"></div>
                    </div>
@@ -37,7 +37,7 @@
                    <!--Mask color-->
                    <div class="view">
                       <img class="d-block w-100" 
-                      src="https://i.pinimg.com/originals/d4/97/d4/d497d49aef7ded8a336d6ce71d84dff2.jpg"
+                      src="{{ asset('img').'/'.$imagen->imagen2g }}"
                          alt="Second slide">
                       <div class="mask rgba-black-strong"></div>
                    </div>
@@ -45,19 +45,7 @@
                      
                    </div>
                 </div>
-                <div class="carousel-item">
-                   <!--Mask color-->
-                   <div class="view">
-                      <img class="d-block w-100"
-                       src="https://www.segurossinbarreras.com/blog/wp-content/uploads/2016/06/4-Preguntas-que-te-debes-hacer-antes-de-visitar-el-taller-mecanico.jpg"
-                         alt="Third slide">
-                      <div class="mask rgba-black-slight"></div>
-                   </div>
-                   <div class="carousel-caption">
-                    
-                   </div>
-                </div>
-             </div>
+
              <!--/.Slides-->
              <!--Controls-->
              <a class="carousel-control-prev" href="#carousel-example-2" role="button" data-slide="prev">
@@ -105,7 +93,7 @@
        <div class="col-md-4" style="float:left">
         <div class="card mb-2">
            <img class="card-img-top"
-           src="https://i.pinimg.com/originals/b2/53/44/b253440d98fc90b960f7f59f62dae7a7.jpg">
+           src="{{ asset('img').'/'.$imagen->imagen1c }}">
            <div class="card-body">
              <h4 class="card-title"></h4>
              
@@ -117,8 +105,8 @@
        <div class="col-md-4" style="float:left">
          <div class="card mb-2">
            <img class="card-img-top"
-           src="https://pbs.twimg.com/media/CHJqWJEW4AAjIEd.jpg">
-           <div class="card-body">
+            src="{{ asset('img').'/'.$imagen->imagen2c }}">       
+                 <div class="card-body">
              <a  data-target="#waModal" data-toggle="modal"  class="btn btn-dark text-white">Obtener promocion</a>
            </div>
          </div>
@@ -127,7 +115,7 @@
        <div class="col-md-4" style="float:left">
          <div class="card mb-2">
            <img class="card-img-top"
-           src="https://www.ofertasahora.com/wp-content/uploads/2013/12/Promociones-navide%C3%B1as-en-taller-de-autos-02dic13.jpg">
+              src="{{ asset('img').'/'.$imagen->imagen3c }}"> 
            <div class="card-body">
             <button data-target="#waModal" data-toggle="modal"  class="btn btn-dark text-white">Obten la promocion</button>
            </div>
@@ -145,7 +133,7 @@
        <div class="col-md-4" style="float:left">
          <div class="card mb-2">
            <img class="card-img-top"
-           src="https://i1.wp.com/www.ofertasahora.com/wp-content/uploads/2014/05/descuento-en-taller-automotriz-12may14.jpg?fit=957%2C1267&ssl=1">
+            src="{{ asset('img').'/'.$imagen->imagen4c }}">
            <div class="card-body">
             <button data-target="#waModal" data-toggle="modal" class="btn btn-dark text-white">Obtener Promocion</button>
            </div>
@@ -155,7 +143,7 @@
        <div class="col-md-4" style="float:left">
          <div class="card mb-2">
            <img class="card-img-top"
-           src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRGn7EcBN6N9xtulyyiC0NRW_cfx9OXnBRHkw&usqp=CAU">
+           src="{{ asset('img').'/'.$imagen->imagen5c }}">
            <div class="card-body">
             <button data-target="#waModal" data-toggle="modal"  class="btn btn-dark text-white">Obtener promocion</button>
            </div>
@@ -165,7 +153,7 @@
        <div class="col-md-4" style="float:left">
          <div class="card mb-2">
            <img class="card-img-top"
-           src="https://www.agromaquinaria.es/ofertas/fotos/12240506062018.jpg">
+             src="{{ asset('img').'/'.$imagen->imagen6c }}">
            <div class="card-body">
             <button data-target="#waModal" data-toggle="modal"   class="btn btn-dark text-white">Obtener promocion</button>
            </div>

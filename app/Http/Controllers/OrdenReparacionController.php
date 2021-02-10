@@ -71,6 +71,8 @@ class OrdenReparacionController extends Controller
 
                 $orden->save();
 
+                return back()->with('exito','Registradas correctamente');
+
 
 
 
