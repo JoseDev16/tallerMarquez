@@ -31,10 +31,20 @@ class ReservaController extends Controller
         $validacionFecha = Reserva::where('fecha',$request->fecha)
                                 ->where('hora',$request->hora)
                                 ->count();
+        $validarCitaUnica =Reserva::where('fecha',$request->fecha)
+                            ->where('hora',$request->hora)
+                            ->where('dni', $request->dni)
+
+                            ->count();
        /// Maximo de citas por hora
         if($validacionFecha >= 3 )
         {
             return back()->with('advertencia','Esta hora ya esta reservada, favor intente en otro horario');
+        }elseif($validarCitaUnica > 1)
+        {
+            return back()->with('advertencia','Usted ya tiene una cita en este horario');
+
+
         }else
         {
           //  dd($request);
@@ -43,6 +53,8 @@ class ReservaController extends Controller
             $reserva->hora = $request->hora;
             $reserva->cliente = $request->cliente;
             $reserva->telefono = $request->telefono;
+            $reserva->dni = $request->dni;
+            $reserva->direccion = $request->direccion;
             $reserva->nota = $request->nota;
             $reserva->estado = "Activa";
             $reserva->razon= $request->razon;
@@ -71,7 +83,8 @@ class ReservaController extends Controller
             $reserva->nota = $request->nota2;
             $reserva->estado = $request->estado;
          
-            $reserva->mecanico= $request->mecanico;
+         
+            $reserva->mecanico= $request->mecanico2;
             $reserva->update();
             return back()->with('exito','reserva actualizada con exito');
         }

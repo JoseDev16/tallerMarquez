@@ -10,11 +10,13 @@ imagenes
 </nav>
 
 <!-- Boton agregar imagen modal -->
+@if($imagenes->count() == 0)
 <div class="d-sm-flex align-items-center justify-content-between mb-4">
     <button type="button" class="btn btn-primary" onclick="limpiarCampos()" data-toggle="modal" data-target="#addModal">
         Agregar imagen
     </button>
 </div>
+@endif
 @if ($errors->any())
     <div class="errors">
         <p class="alert alert-warning" role="alert">Por favor corrige los siguientes errores</p>
@@ -25,6 +27,14 @@ imagenes
         </ul>
     </div>
 @endif
+<!-- Mensaje Exito -->
+@if(session('exito'))
+<div class="alert alert-success">
+    <button type="button" class="close" data-dismiss="alert">×</button>
+    {{ session('exito') }}
+</div>
+@endif
+<!-- Fin Mensaje Exito -->
 
 <!-- Fin Boton agregar imagen modal -->
 <!-- Agregar Modal -->
@@ -91,14 +101,7 @@ imagenes
     </div>
 </div>
 <!-- Fin Agregar Modal -->
-<!-- Mensaje Exito -->
-@if(session('exito'))
-<div class="alert alert-success">
-    <button type="button" class="close" data-dismiss="alert">×</button>
-    {{ session('exito') }}
-</div>
-@endif
-<!-- Fin Mensaje Exito -->
+
 @if(count($imagenes) > 0)
 <!-- Table -->
 <table class="table">
@@ -161,10 +164,7 @@ imagenes
                     style="color:gray !important; background-color:transparent; border: 0px solid;"
                     onclick="fun_edit('{{$imagen->id}}')"></button>
       
-                <button type="button" title="Eliminar" data-toggle="modal" data-target="#deleteModal"
-                    class="fas fa-w fa-trash"
-                    style="color:gray !important; background-color:transparent; border: 0px solid;"
-                    onclick="fun_delete('{{$imagen->id}}')"></button>
+             
              
             </td>
         </tr>
@@ -192,20 +192,47 @@ imagenes
                 </button>
             </div>
             <div class="modal-body">
-                <form action="{{ route('imagen.edit') }}" method="POST">
+                <form action="{{ route('imagen.edit') }}" method="POST" enctype="multipart/form-data">
                     @csrf
-                    <div class="form-group required">
-                        <label for="" class="control-label">Nombre de imagen: </label>
-                        <input maxlength="20" type="text" name="nomb_imagen" id="nomb_imagen"
-                            class="form-control{{ $errors->has('nomb_imagen') ? ' is-invalid' : '' }}" required
-                            autofocus>
-                        @if($errors->has('nomb_imagen'))
-                        <span class="invalid-feedback" role="alert">
-                            <strong>{{ $errors->first('nomb_imagen') }}</strong>
-                        </span>
-                        @endif
+                       <div class="form-group">
+                        <label for="ruta2">Imagen Banner 1</label>
+                        <input class="form-control"  type="file" name="imagen1ge" id="ruta2" >
                     </div>
-                    <input type="hidden" name="user" value="{{auth()->user()->name}}">
+                    <div class="form-group">
+                        <label for="ruta">Imagen Banner 2</label>
+                        <input class="form-control"  type="file" name="imagen2ge" id="ruta" >
+                    </div>
+                    <div class="form-group">
+                     <label for="ruta">Imagen Carrusel 1</label>
+                        <input class="form-control"  type="file" name="imagen1ce" id="ruta" >
+                    </div>
+                    <div class="form-group">
+                        <label for="ruta">Imagen Carrusel 2</label>
+                        <input class="form-control"  type="file" name="imagen2ce" id="ruta">
+                    </div>
+                    <div class="form-group">
+                        <label for="ruta">Imagen Carrusel 3</label>
+                        <input class="form-control"  type="file" name="imagen3ce" id="ruta">
+                    </div>
+                    <div class="form-group">
+                        <label for="ruta">Imagen Carrusel 4</label>
+                        <input class="form-control"  type="file" name="imagen4ce" id="ruta" >
+                    </div>
+                    <div class="form-group">
+                        <label for="ruta">Imagen Carrusel 5</label>
+                        <input class="form-control"  type="file" name="imagen5ce" id="ruta" >
+                    </div>
+                    <div class="form-group">
+                        <label for="ruta">Imagen Carrusel 6</label>
+                        <input class="form-control"  type="file" name="imagen6ce" id="ruta" >
+                    </div>
+                    
+                
+
+
+
+
+
                     <div class="modal-footer d-flex justify-content-center">
                         <button type="submit" class="btn btn-primary">
                             <i class='fas fa-check-circle'></i>
@@ -223,42 +250,7 @@ imagenes
     </div>
 </div>
 <!-- Fin Editar Modal-->
-<!-- Eliminar Modal -->
-<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-    aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-body align-self-center">
-                <form action="{{ route('imagen.destroy') }}" method="POST">
-                    @csrf
-                    {{ method_field('DELETE') }}
-                    <div style="text-align: center">
-                        <br>
-                        <i class='fas fa-exclamation-circle' style='font-size:80px;color: gray;'></i>
-                        <br>
-                        <br>
-                        <strong>
-                            <h3>¿Estás seguro que deseas eliminar la imagen?</h3>
-                        </strong>
-                        <strong>Recuerda que NO podrás revertir esta acción</strong>
-                        <input type="hidden" id="delete_id" name="delete_id">
-                        <input type="hidden" name="user" value="{{auth()->user()->name}}">
-                    </div>
-                    <div class="modal-footer d-flex justify-content-center">
-                        <button type="submit" class="btn btn-primary">
-                            <i class='fas fa-check-circle'></i>
-                            Eliminar
-                        </button>
-                        <a href="" class="btn btn-primary" data-dismiss="modal">
-                            <i class='fa fa-times'></i>
-                            Cancelar
-                        </a>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
+
 @else
 <div class="alert alert-danger">
     <strong>¡Opps! Parece que no tienes ninguna imagen registrada.</strong>

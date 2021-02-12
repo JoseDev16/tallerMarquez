@@ -227,8 +227,6 @@
   {
 
           
-      var selected = combo.options[combo.selectedIndex].text;
-      
       var promo = document.getElementById("promo").value;
       var cant = document.getElementById("cant").value;
       console.log(promo);

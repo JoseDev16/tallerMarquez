@@ -25,6 +25,7 @@ class CreateImagenesPromocionsTable extends Migration
             $table->string('imagen4c');
             $table->string('imagen5c');
             $table->string('imagen6c');
+            
 
       
 

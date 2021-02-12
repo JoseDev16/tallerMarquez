@@ -23,6 +23,14 @@
                 <input  type="text" name="telefono" id="telefono"
                 class="form-control"   required  autofocus>
                 <br>
+                <label for="mecanico" class="control-label">DNI: </label>
+                <input  type="text" name="dni" id="dni"
+                class="form-control"   required  autofocus>
+                <br>
+                <label for="mecanico" class="control-label">Direccion: </label>
+                <input  type="text" name="direccion" id="direccion"
+                class="form-control"   required  autofocus>
+                <br>
                 <label for="codigo_material" class="control-label">Fecha: </label>
                   <input type="text" class="form-control" id="demo" name="fecha"/>
                                     

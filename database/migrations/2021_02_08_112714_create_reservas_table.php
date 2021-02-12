@@ -17,12 +17,15 @@ class CreateReservasTable extends Migration
             $table->id();
             $table->string('cliente');
             $table->string('telefono');
+            $table->string('dni');
+            $table->string('direccion');
             $table->string('estado');
             $table->string('razon');
             $table->date('fecha');
             $table->string('hora');
             $table->string('nota')->nullable();
             $table->string('mecanico')->nullable();
+
             $table->timestamps();
         });
     }

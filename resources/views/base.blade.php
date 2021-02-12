@@ -114,15 +114,13 @@
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages2"
                     aria-expanded="true" aria-controls="collapsePages">
-                    <i class="fas fa-box"></i>
-                    <span>Catalogos</span>
+                    <i class="fas fa-toolbox"></i>
+                    <span>Herramientas</span>
                 </a>
                 <div id="collapsePages2" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Catalogos de sistema:</h6>
-                        @can('producto.gestionarProducto')
-                        <a class="collapse-item" href="{{route('categoria.index')}}">Categoria Productos</a>
-                        @endcan
+                        
                         @can('categoria.gestionarCategorias')
                         <a class="collapse-item" href="{{route('categoriaMaterial.index')}}">Categoria Herramientas</a>
                         @endcan
@@ -130,7 +128,6 @@
                         <a class="collapse-item" href="{{route('subcategoriaMaterial.index')}}">Subcategoria Herramientas</a>
                         @endcan
                         @can('producto.gestionarProducto')
-                        <a class="collapse-item" href="{{route('producto.index')}}">Productos</a>
                         <a class="collapse-item" href="{{route('material.index')}}">Herramientas Cliente</a>
                         @endcan
 
@@ -138,15 +135,53 @@
                     </div>
                 </div>
             </li>
-        
+
             <li class="nav-item">
-                <a class="nav-link collapsed" href="{{route('cliente.index')}}"
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages4"
+                    aria-expanded="true" aria-controls="collapsePages">
+                    <i class="fas fa-box"></i>
+                    <span>Productos</span>
+                </a>
+                <div id="collapsePages4" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">Catalogos de sistema:</h6>
+                        @can('producto.gestionarProducto')
+                        <a class="collapse-item" href="{{route('categoria.index')}}">Categoria Productos</a>
+                        @endcan
+                       
+                        @can('producto.gestionarProducto')
+                        <a class="collapse-item" href="{{route('producto.index')}}">Productos</a>
+                        @endcan
+
+
+                    </div>
+                </div>
+            </li>
+
+
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages7"
                     aria-expanded="true" aria-controls="collapsePages">
                     <i class="fas fa-users"></i>
                     <span>Clientes</span>
                 </a>
+                <div id="collapsePages7" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">Catalogos de sistema:</h6>
+                        @can('producto.gestionarProducto')
+                        <a class="collapse-item" href="{{route('cliente.index')}}">Clientes</a>
+                        @endcan
+                       
+                        @can('producto.gestionarProducto')
+                        <a class="collapse-item" href="{{route('reserva.index')}}">Reserva</a>
+                        @endcan
 
+
+                    </div>
+                </div>
             </li>
+        
+            
             @can('orden.gestionarOrdenes')
             <li class="nav-item">
                 <a class="nav-link collapsed" href="{{route('orden.index')}}"
@@ -157,6 +192,15 @@
 
             </li>
             @endcan
+
+             <li class="nav-item">
+                <a class="nav-link collapsed" href="{{route('imagen.index')}}"
+                    aria-expanded="true" aria-controls="collapsePages">
+                    <i class="fas fa-images"></i>
+                    <span>Imagenes promocion</span>
+                </a>
+
+            </li>
 
             <!-- Divider -->
             <hr class="sidebar-divider d-none d-md-block">
