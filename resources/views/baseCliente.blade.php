@@ -10,6 +10,12 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+     <link href="https://fonts.googleapis.com/css?family=Playfair+Display:400,700,900" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700" rel="stylesheet">
+      <link href="{{ asset('vendor/fontawesome-free/css/all.min.css') }}" rel="stylesheet" type="text/css">
+    
+
   <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/css/bootstrap-datetimepicker.css" integrity="sha256-b5ZKCi55IX+24Jqn638cP/q3Nb2nlx+MH/vMMqrId6k=" crossorigin="anonymous" />
@@ -26,16 +32,21 @@
 
 
 <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
-  <a class="navbar-brand" href="">Taller Ramirez</a>
-  <button data-target="#waModal2" data-toggle="modal" class="btn btn-dark text-white">Agendar cita</button>
+  <a href="{{route('homeCliente')}}" class="navbar-brand" href="">Taller Ramirez</a>
+  <a data-target="#waModal2" data-toggle="modal" class="btn btn-dark text-white">Agendar cita</a>
+    <a href="{{route('servicios')}}" class="navbar-brand" href="">Servicios</a>
+        <a href="{{route('nosotros')}}" class="navbar-brand" href="">Nosotros</a>
+
+
  
 </nav>
   
 
 
 <div class="container-fluid">
-    <header class="h1 text-center pt-5">
-        Bienvenidos a Taller Ramirez
+    <header class="h1 text-center pb-5 pt-5">
+    @yield('titulo')
+        
 
     </header>
 @if(session('exito'))
@@ -52,8 +63,53 @@
 @endif   
     @yield('content')
 
+    
+
  
 </div>
+<footer class="container-fluid bg-grey py-5">
+<div class="container">
+   <div class="row">
+      <div class="col-md-6">
+         <div class="row">
+            <div class="col-md-6 ">
+               <div class="logo-part">
+                  <img src="https://i.pinimg.com/originals/7e/12/68/7e126834415d452a80fb8b357e4a15c3.jpg" class="w-50 logo-footer" >
+                  <p>Taller Ramirez,Bolivia</p>
+                  <p>El mejor taller de la region, siempre con las mejores ofertas y precios</p>
+               </div>
+            </div>
+            <div class="col-md-6 px-4">
+               <h6> Sobre nosotros</h6>
+               <p>Taller de servicios de mecanica y electricidad automotriz</p>
+                 <ul><strong> Especialistas en:</strong>
+                        <li> Caja de transmision</li>
+                        <li> Frenos  </li>
+                        <li> Reparacion radiadores </li>
+                        <li> Respuestos de motor </li>
+                    
+                     </ul>
+            
+            </div>
+         </div>
+      </div>
+      <div class="col-md-6">
+      <h4> Siguenos en nuestras redes sociales </h4>
+        <ul>
+                        <li>  <i class="fab fa-facebook"></i></li>
+                        <li> <i class="fab fa-twitter" aria-hidden="true"></i>  </li>
+                        <li> <i class="fab fa-instagram" aria-hidden="true"></i> </li>
+                       
+                    
+                     </ul>
+       
+
+         
+      </div>
+   </div>
+</div>
+</div>
+
 
 <!-- Editar Modal -->
 <div class="modal fade" id="waModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalTitle"
@@ -80,6 +136,18 @@
                   <label for="mecanico" class="control-label">Telefono: </label>
                 <input  type="text" name="telefono" id="telefono"
                 class="form-control"   required  autofocus>
+                <br>
+                    <label for="mecanico" class="control-label">Telefono: </label>
+                      <input  type="text" name="telefono" id="telefono"
+                         class="form-control"   required  autofocus>
+                  <br>
+                    <label for="mecanico" class="control-label">DNI: </label>
+                     <input  type="text" name="dni" id="dni"
+                class="form-control"   required  autofocus>
+                <br>
+                      <label for="mecanico" class="control-label">Direccion: </label>
+                        <input  type="text" name="direccion" id="direccion"
+                         class="form-control"   required  autofocus>
                 <br>
                 <label for="codigo_material" class="control-label">Fecha de reserva: </label>
                   <input type="text" class="form-control" id="demo" name="fecha"/>
@@ -122,55 +190,7 @@
       </div>
    </div>
 </div>
-<!-- Fin Editar Modal-->
 
-
-
-
-
-  <!-- Wasap Modal 
-<div class="modal fade" id="waModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalTitle"
-aria-hidden="true">
-<div class="modal-dialog" role="document">
-   <div class="modal-content">
-      <div class="modal-header" style="background-color:#F2F2F2 !important;">
-         <h5 class="modal-title" id="exampleModalLongTitle">
-            <i class="fab fa-whatsapp"></i>
-            Agendar cita
-         </h5>
-         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-         </button>
-      </div>
-      <div class="modal-body">
-         
-            <div class="form-group required">
-             <label for="" class="control-label">Seleccione fecha y hora: </label>
-             <input  type="datetime-local" name="fecha" id="fecha"
-                class="form-control" required  autofocus>
-              <br>
-              <label for="" class="control-label">Razon </label>
-              <input  type="text" name="razon" id="razon"
-                 class="form-control"   required autofocus>
-               <br>
-            
-           
-       
-            <div class="modal-footer d-flex justify-content-center">
-              <button class="form-control btn btn-success " onclick="ShowSelected2()"><i class="fab fa-whatsapp "></i> Agendar cita</i></button>
-
-              
-              
-               <a href="" class="btn btn-primary" data-dismiss="modal">
-                  <i class='fa fa-times'></i>
-                  Cancelar
-               </a>
-            </div>
-        
-      </div>
-   </div>
-</div>
-</div> -->
 
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.26.0/moment.min.js"></script>
@@ -210,5 +230,7 @@ aria-hidden="true">
         });
     });
 </script>
+<script src="https://unpkg.com/ionicons@5.4.0/dist/ionicons.js"></script>
+
 </body>
 </html>

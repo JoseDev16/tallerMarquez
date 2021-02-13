@@ -110,7 +110,7 @@ Listado de `reservas
                            </select>
                         <label for="" class="control-label">Razon: </label>
                         <input  type="text" name="razon" id="razon"
-                           class="form-control" placeholder="Ingrese nombre de material"  required  autofocus>
+                           class="form-control" placeholder="Ingrese razon de visita"  required  autofocus>
                         <br>
                         
                      
@@ -172,9 +172,11 @@ Listado de `reservas
 
             <th scope="col">Cliente</th>
             <th scope="col">Telefono</th>
+            <th scope="col">DNI</th>
+            <th scope="col">Direccion</th>
 
             <th scope="col">Razon</th>
-            <th scope="col">Nota</th>
+        
             <th scope="col">Mecanico</th>
             <th scope="col">Estado Reserva</th>
             <th scope="col"> Acciones </th>
@@ -188,8 +190,10 @@ Listado de `reservas
             <td class="text-dark"> {{ $reserva->hora }} </td>
             <td class="text-dark"> {{ $reserva->cliente }} </td>
             <td class="text-dark"> {{ $reserva->telefono}} </td>
+             <td class="text-dark"> {{ $reserva->dni}} </td>
+              <td class="text-dark"> {{ $reserva->direccion}} </td>
              <td class="text-dark"> {{ $reserva->razon}} </td>
-            <td class="text-dark"> {{ $reserva->nota }} </td>
+          
             <td class="text-dark"> {{ $reserva->mecanico }} </td>
             <td class="text-dark"> {{ $reserva->estado}} </td>
             <td class="text-dark"> 

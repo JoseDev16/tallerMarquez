@@ -37,10 +37,11 @@ class ReservaController extends Controller
 
                             ->count();
        /// Maximo de citas por hora
+      // dd($validarCitaUnica > 1 );
         if($validacionFecha >= 3 )
         {
             return back()->with('advertencia','Esta hora ya esta reservada, favor intente en otro horario');
-        }elseif($validarCitaUnica > 1)
+        }elseif($validarCitaUnica >= 1)
         {
             return back()->with('advertencia','Usted ya tiene una cita en este horario');
 

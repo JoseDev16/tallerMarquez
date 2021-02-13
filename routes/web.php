@@ -25,10 +25,14 @@ use App\Http\Controllers\ImagenesPromocionController;
 | contains the "web" middleware group. Now create something great!
 |
 */
-//Route::get('/', function () {
-  //  return view('inicioClientes');
-//})->name('home');
-Route::get('/', [ImagenesPromocionController::class, 'inicioClientes'])->name('home');
+Route::get('/servicios', function () {
+   return view('servicios');
+})->name('servicios');
+
+Route::get('/nosotros', function () {
+    return view('nosotros');
+ })->name('nosotros');
+Route::get('/', [ImagenesPromocionController::class, 'inicioClientes'])->name('homeCliente');
 
 Route::middleware(['auth'])->get('/admin', function () {
     return view('inicioAdmin');

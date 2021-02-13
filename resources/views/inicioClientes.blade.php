@@ -1,4 +1,7 @@
 @extends('baseCliente')
+@section('titulo')
+Bienvenidos a taller Ramirez
+@endsection
 @section('content')
 <div class="row">
 
