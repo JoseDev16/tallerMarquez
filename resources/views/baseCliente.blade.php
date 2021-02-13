@@ -137,10 +137,7 @@
                 <input  type="text" name="telefono" id="telefono"
                 class="form-control"   required  autofocus>
                 <br>
-                    <label for="mecanico" class="control-label">Telefono: </label>
-                      <input  type="text" name="telefono" id="telefono"
-                         class="form-control"   required  autofocus>
-                  <br>
+                    
                     <label for="mecanico" class="control-label">DNI: </label>
                      <input  type="text" name="dni" id="dni"
                 class="form-control"   required  autofocus>
